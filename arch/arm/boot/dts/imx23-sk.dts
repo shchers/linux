@@ -30,20 +30,16 @@
 				#size-cells = <0>;
 				compatible = "fsl,imx23-spi";
 				pinctrl-names = "default";
-				pinctrl-0 = <&spi0_pins_a>;
+				pinctrl-0 = <&spi0_pins &spi0_pins_fixup>;
 				status = "okay";
 
-				spi0_pins_a: spi0@0 {
+				eth: ks8851@0 {
+					compatible = "micrel,ks8851";
+					spi-max-frequency = <24000000>;
 					reg = <0>;
-					fsl,pinmux-ids = <
-						MX23_PAD_SSP1_DATA0__SSP1_DATA0
-						MX23_PAD_SSP1_DATA3__SSP1_DATA3
-						MX23_PAD_SSP1_CMD__SSP1_CMD
-						MX23_PAD_SSP1_SCK__SSP1_SCK
-					>;
-					fsl,drive-strength = <MXS_DRIVE_8mA>;
-					fsl,voltage = <MXS_VOLTAGE_HIGH>;
-					fsl,pull-up = <MXS_PULL_ENABLE>;
+
+					interrupt-parent = <&gpio2>;
+					interrupts = <3 0x2>;
 				};
 			};
 
@@ -69,6 +65,34 @@
 					fsl,drive-strength = <MXS_DRIVE_4mA>;
 					fsl,voltage = <MXS_VOLTAGE_HIGH>;
 					fsl,pull-up = <MXS_PULL_DISABLE>;
+				};
+
+				spi0_pins: spi0-pins@0 {
+					reg = <0>;
+					fsl,pinmux-ids = <
+						MX23_PAD_SSP1_DATA0__SSP1_DATA0
+						MX23_PAD_SSP1_DATA3__SSP1_DATA3
+						MX23_PAD_SSP1_CMD__SSP1_CMD
+						MX23_PAD_SSP1_SCK__SSP1_SCK
+					>;
+					fsl,drive-strength = <MXS_DRIVE_8mA>;
+					fsl,voltage = <MXS_VOLTAGE_HIGH>;
+					fsl,pull-up = <MXS_PULL_ENABLE>;
+				};
+
+				spi0_pins_fixup: spi0-pins-fixup {
+					fsl,pinmux-ids = <
+						MX23_PAD_SSP1_SCK__SSP1_SCK
+					>;
+					fsl,pull-up = <MXS_PULL_DISABLE>;
+				};
+
+				eth_irq: eth-irq {
+					reg = <0>;
+					fsl,pinmux-ids = <MX23_PAD_SSP1_DATA1__GPIO_2_3>;
+					fsl,drive-strength = <MXS_DRIVE_4mA>;
+					fsl,voltage = <MXS_VOLTAGE_HIGH>;
+					fsl,pull-up = <MXS_PULL_ENABLE>;
 				};
 			};
 

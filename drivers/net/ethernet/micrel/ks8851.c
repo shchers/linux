@@ -229,7 +229,7 @@ static void ks8851_wrreg8(struct ks8851_net *ks, unsigned reg, unsigned val)
  */
 static inline bool ks8851_rx_1msg(struct ks8851_net *ks)
 {
-	return true;
+	return !IS_ENABLED(CONFIG_ARCH_MXS);
 }
 
 /**

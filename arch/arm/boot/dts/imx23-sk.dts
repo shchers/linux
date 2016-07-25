@@ -44,29 +44,6 @@
 			};
 
 			pinctrl@80018000 {
-				pinctrl-names = "default";
-				pinctrl-0 = <&hog_pins_a>;
-
-				hog_pins_a: hog@0 {
-					reg = <0>;
-					fsl,pinmux-ids = <
-						MX23_PAD_GPMI_ALE__GPIO_0_17
-					>;
-					fsl,drive-strength = <MXS_DRIVE_4mA>;
-					fsl,voltage = <MXS_VOLTAGE_HIGH>;
-					fsl,pull-up = <MXS_PULL_DISABLE>;
-				};
-
-				led_pin_gpio2_1: led_gpio2_1@0 {
-					reg = <0>;
-					fsl,pinmux-ids = <
-						MX23_PAD_SSP1_DETECT__GPIO_2_1
-					>;
-					fsl,drive-strength = <MXS_DRIVE_4mA>;
-					fsl,voltage = <MXS_VOLTAGE_HIGH>;
-					fsl,pull-up = <MXS_PULL_DISABLE>;
-				};
-
 				spi0_pins: spi0-pins@0 {
 					reg = <0>;
 					fsl,pinmux-ids = <
@@ -187,8 +164,6 @@
 
 	leds {
 		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&led_pin_gpio2_1>;
 
 		user {
 			label = "green";
